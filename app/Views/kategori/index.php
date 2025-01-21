@@ -59,7 +59,7 @@ Manajemen Data Kategori
                 <td>
                     <button class="btn btn-info" title="Edit Data" onclick="editData('<?= $row['id'] ?>')"><i class="fas fa-edit"></i></button>
 
-                    <form method="POST" action="/kategori/hapus/<?= $row['id'] ?>" style="display: inline;" onsubmit="hapusData();">
+                    <form method="POST" action="/kategori/hapus/<?= $row['id'] ?>" style="display: inline;" onsubmit="return hapusData();">
                         <input type="hidden" value="DELETE" name="_method">
                         <button type="submit" class="btn btn-danger" title="Hapus Data"><i class="fas fa-trash-alt"></i></button>
                     </form>

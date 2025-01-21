@@ -14,6 +14,21 @@ Manajemen Data Barang
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
+
+<?php if (session()->getFlashdata('errors')): ?>
+    <div class="alert alert-danger">
+        <?= session()->getFlashdata('errors'); ?>
+    </div>
+<?php endif; ?>
+
+<?php if (session()->getFlashdata('success')): ?>
+    <div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <h5><i class="icon fas fa-check"></i> Sukses!</h5>
+        <?= session()->getFlashdata('success'); ?>
+    </div>
+<?php endif; ?>
+
 <table class="table table-striped table-bordered" style="width:100%">
     <thead>
         <tr>
@@ -41,10 +56,33 @@ Manajemen Data Barang
                 <td><?= number_format($row['barang_harga'], 0) ?></td>
                 <td><?= ($row['barang_stok']) ?></td>
                 <td>
+                    <button type="button" title="Edit" class="btn btn-sm btn-info" onclick="edit('<?= ($row['barang_kode']) ?>')">
+                        <i class="fas fa-edit"></i>
+                    </button>
 
+                    <form method="POST" action="/barang/hapus/<?= $row['barang_kode'] ?>" style="display: inline;" onsubmit="return hapusData();">
+                        <input type="hidden" value="DELETE" name="_method">
+                        <button type="submit" class="btn btn-sm btn-danger" title="Hapus Data"><i class="fas fa-trash-alt"></i></button>
+                    </form>
                 </td>
             </tr>
         <?php endforeach ?>
     </tbody>
 </table>
+
+<script>
+    function edit(kode) {
+        window.location.href = ('/barang/edit/' + kode);
+    }
+
+    function hapusData() {
+        pesan = confirm('Yakin hapus data');
+
+        if (pesan) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
 <?= $this->endSection() ?>
