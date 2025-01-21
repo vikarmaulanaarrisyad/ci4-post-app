@@ -26,6 +26,6 @@ class Satuan extends Migration
 
     public function down()
     {
-        //
+        $this->forge->dropTable('satuan');
     }
 }

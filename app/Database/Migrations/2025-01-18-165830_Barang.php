@@ -33,6 +33,9 @@ class Barang extends Migration
             'barang_harga' => [
                 'type' => 'double',
             ],
+            'barang_stok' => [
+                'type' => 'int',
+            ],
             'barang_gambar' => [
                 'type' => 'varchar',
                 'constraint' => 200
