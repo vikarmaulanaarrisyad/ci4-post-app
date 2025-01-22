@@ -26,6 +26,14 @@
     <link rel="stylesheet" href="<?= base_url() ?>/plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="<?= base_url() ?>/plugins/summernote/summernote-bs4.min.css">
+    <link rel="stylesheet" href="<?= base_url() ?>/adminlte/plugins/sweetalert2/sweetalert2.min.css">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="<?= base_url() ?>/adminlte/plugins/toastr/toastr.min.css">
+
+    <!-- jQuery -->
+    <script src="<?= base_url() ?>/plugins/jquery/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="<?= base_url() ?>/plugins/jquery-ui/jquery-ui.min.js"></script>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -105,6 +113,24 @@
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-header">Transaksi</li>
+                        <li class="nav-item">
+                            <a href="<?= site_url('barangmasuk'); ?>" class="nav-link">
+                                <i class="nav-icon fas fa-arrow-circle-down text-primary"></i>
+                                <p>
+                                    Barang Masuk
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-header">Utility</li>
+                        <li class="nav-item">
+                            <a href="<?= site_url('kategori'); ?>" class="nav-link">
+                                <i class="nav-icon fas fa-users text-danger"></i>
+                                <p>
+                                    Management User
+                                </p>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -171,10 +197,8 @@
     </div>
     <!-- ./wrapper -->
 
-    <!-- jQuery -->
-    <script src="<?= base_url() ?>/plugins/jquery/jquery.min.js"></script>
-    <!-- jQuery UI 1.11.4 -->
-    <script src="<?= base_url() ?>/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
         $.widget.bridge('uibutton', $.ui.button)
@@ -199,6 +223,7 @@
     <script src="<?= base_url() ?>/plugins/summernote/summernote-bs4.min.js"></script>
     <!-- overlayScrollbars -->
     <script src="<?= base_url() ?>/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <script src="<?= base_url() ?>/adminlte/plugins/sweetalert2/sweetalert2.all.min.js"></script>
     <!-- AdminLTE App -->
     <script src="<?= base_url() ?>/dist/js/adminlte.js?v=3.2.0"></script>
     <!-- AdminLTE for demo purposes -->

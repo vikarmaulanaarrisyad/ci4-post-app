@@ -41,6 +41,9 @@ class Autoload extends AutoloadConfig
      */
     public $psr4 = [
         APP_NAMESPACE => APPPATH,
+        'Config' => APPPATH . 'Config',
+        'PHPSQLParser' => APPPATH . 'ThirdParty/php-sql-parser/src/PHPSQLParser',
+        'Hermawan\DataTables' => APPPATH . 'ThirdParty/codeigniter4-datatables/src'
     ];
 
     /**

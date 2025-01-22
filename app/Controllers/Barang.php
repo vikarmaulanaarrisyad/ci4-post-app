@@ -7,6 +7,7 @@ use App\Models\Modelbarang;
 use App\Models\Modelkategori;
 use App\Models\Modelsatuan;
 use CodeIgniter\HTTP\ResponseInterface;
+use \Hermawan\DataTables\DataTable;
 
 class Barang extends BaseController
 {
@@ -19,11 +20,37 @@ class Barang extends BaseController
 
     public function index()
     {
-        $data = [
-            'tampildata' => $this->barang->tampildata()
-        ];
+        $modalKategori = new Modelkategori();
 
-        return view('barang/index', $data);
+        return view('barang/viewbarang_new', [
+            'datakategori' => $modalKategori->findAll()
+        ]);
+    }
+
+    public function listData()
+    {
+        if ($this->request->isAJAX()) {
+            $db = db_connect();
+            $builder = $db->table('barang')
+                ->select('barang_kode, barang_nama, kategori_id, satuan_id, barang_harga, barang_stok, kategori_nama')
+                ->join('kategori', 'barang.kategori_id = kategori.id');
+
+            return DataTable::of($builder)
+                ->addNumbering('no')
+                ->filter(function ($builder, $request) {
+                    if ($request->kategori) {
+                        $builder->where('kategori_id', $request->kategori);
+                    }
+                })
+                ->add('action', function ($row) {
+                    return '
+                    <button type="button" class="btn btn-danger btn-sm" onclick="hapus(\'' . $row->barang_kode . '\')"><i class="fas fa-trash-alt"></i></button>
+                    <button type="button" class="btn btn-info btn-sm" onclick="edit(\'' . $row->barang_kode . '\')"><i class="fas fa-edit"></i></button>
+                    
+                    ';
+                })
+                ->toJson(true);
+        }
     }
 
     public function tambah()
@@ -270,6 +297,56 @@ class Barang extends BaseController
     }
 
     public function hapus($kode)
+    {
+        try {
+            // Cari data barang berdasarkan kode
+            $barangData = $this->barang->where('barang_kode', $kode)->first();
+
+            if (!$barangData) {
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'message' => 'Data barang tidak ditemukan.'
+                ]);
+            }
+
+            // Ambil path gambar lama
+            $pathGambarLama = $barangData['barang_gambar'];
+
+            // Hapus gambar lama jika ada dan file masih ada di server
+            if ($pathGambarLama && file_exists($pathGambarLama)) {
+                if (!unlink($pathGambarLama)) {
+                    return $this->response->setJSON([
+                        'status' => 'error',
+                        'message' => 'Gagal menghapus gambar.'
+                    ]);
+                }
+            }
+
+            // Hapus data barang berdasarkan id
+            if (!$this->barang->delete($barangData['id'])) {
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'message' => 'Gagal menghapus data barang.'
+                ]);
+            }
+
+            // Set pesan sukses
+            return $this->response->setJSON([
+                'status' => 'success',
+                'message' => 'Data barang berhasil dihapus.'
+            ]);
+        } catch (\Exception $e) {
+            // Tangani error tak terduga
+            log_message('error', 'Error saat menghapus barang: ' . $e->getMessage());
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Terjadi kesalahan saat menghapus data barang.'
+            ]);
+        }
+    }
+
+
+    public function hapus1($kode)
     {
         // Cari data barang berdasarkan kode
         $barangData = $this->barang->where('barang_kode', $kode)->first();
