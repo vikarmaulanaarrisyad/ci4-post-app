@@ -11,7 +11,7 @@ $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
 $routes->setAutoRoute(true);
-$routes->get('/', 'Main::index');
+$routes->get('/', 'Login::index');
 
 // Routes for 'Kategori' (Category)
 $routes->get('/kategori', 'Kategori::index');

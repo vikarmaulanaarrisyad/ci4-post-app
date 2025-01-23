@@ -34,6 +34,8 @@ class Filters extends BaseFilters
         'forcehttps'    => ForceHTTPS::class,
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
+        'filteradmin'  => \App\Filters\FilterAdmin::class,
+        'filtercustomer'  => \App\Filters\FilterCustomer::class,
     ];
 
     /**
@@ -72,10 +74,21 @@ class Filters extends BaseFilters
             // 'honeypot',
             // 'csrf',
             // 'invalidchars',
+            'filteradmin' => [
+                'except' => ['login/*', 'login', '/']
+            ],
+            'filtercustomer' => [
+                'except' => ['login/*', 'login', '/']
+            ],
         ],
         'after' => [
-            // 'honeypot',
-            // 'secureheaders',
+            'filteradmin' => [
+                'except' => ['main/*', 'barang/*', 'main']
+            ],
+            'filtercustomer' => [
+                'except' => ['main/*', 'main']
+            ],
+            'toolbar',
         ],
     ];
 

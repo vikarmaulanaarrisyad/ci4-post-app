@@ -80,7 +80,9 @@
                         <img src="<?= base_url() ?>/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Administrator</a>
+                        <a href="#" class="d-block">
+                            <?= session()->namauser ?>
+                        </a>
                     </div>
                 </div>
 
@@ -88,32 +90,28 @@
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                        <li class="nav-header">Master Data</li>
-                        <li class="nav-item">
-                            <a href="<?= site_url('kategori'); ?>" class="nav-link">
-                                <i class="nav-icon fas fa-tasks"></i>
-                                <p>
-                                    Kategori
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= site_url('satuan'); ?>" class="nav-link">
-                                <i class="nav-icon fas fa-angle-double-right"></i>
-                                <p>
-                                    Satuan
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= site_url('barang'); ?>" class="nav-link">
-                                <i class="nav-icon fas fa-tasks text-danger"></i>
-                                <p>
-                                    Barang
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-header">Transaksi</li>
+                        <?php
+                        if (session()->idlevel == 1):
+                        ?>
+                            <li class="nav-header">Master Data</li>
+                            <li class="nav-item">
+                                <a href="<?= site_url('kategori'); ?>" class="nav-link">
+                                    <i class="nav-icon fas fa-tasks"></i>
+                                    <p>
+                                        Kategori
+                                    </p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="<?= site_url('barang'); ?>" class="nav-link">
+                                    <i class="nav-icon fas fa-tasks text-danger"></i>
+                                    <p>
+                                        Barang
+                                    </p>
+                                </a>
+                            </li>
+                            <!-- <li class="nav-header">Transaksi</li>
                         <li class="nav-item">
                             <a href="<?= site_url('barangmasuk'); ?>" class="nav-link">
                                 <i class="nav-icon fas fa-arrow-circle-down text-primary"></i>
@@ -128,6 +126,17 @@
                                 <i class="nav-icon fas fa-users text-danger"></i>
                                 <p>
                                     Management User
+                                </p>
+                            </a>
+                        </li> -->
+                        <?php endif; ?>
+
+
+                        <li class="nav-item">
+                            <a href="<?= site_url('login/logout'); ?>" class="nav-link">
+                                <i class="nav-icon fas fa-sign-out-alt text-primary"></i>
+                                <p>
+                                    Logout
                                 </p>
                             </a>
                         </li>
