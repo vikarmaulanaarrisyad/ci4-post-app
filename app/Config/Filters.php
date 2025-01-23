@@ -83,7 +83,7 @@ class Filters extends BaseFilters
         ],
         'after' => [
             'filteradmin' => [
-                'except' => ['main/*', 'barang/*', 'main']
+                'except' => ['main/*', 'barang/*', 'main', 'barang', 'kategori/*', 'kategori']
             ],
             'filtercustomer' => [
                 'except' => ['main/*', 'main']

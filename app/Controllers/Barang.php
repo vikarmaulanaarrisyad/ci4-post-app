@@ -32,7 +32,7 @@ class Barang extends BaseController
         if ($this->request->isAJAX()) {
             $db = db_connect();
             $builder = $db->table('barang')
-                ->select('barang_kode, barang_nama, kategori_id, satuan_id, barang_harga, barang_stok, kategori_nama')
+                ->select('barang_kode, barang_nama, kategori_id, barang_harga, barang_stok, kategori_nama')
                 ->join('kategori', 'barang.kategori_id = kategori.id');
 
             return DataTable::of($builder)
@@ -56,13 +56,10 @@ class Barang extends BaseController
     public function tambah()
     {
         $modelKategori = new Modelkategori();
-        $modelSatuan = new Modelsatuan();
         $dataKategori = $modelKategori->findAll();
-        $dataSatuan = $modelSatuan->findAll();
 
         $data = [
             'datakategori' => $dataKategori,
-            'datasatuan' => $dataSatuan,
         ];
 
         return view('barang/formtambah', $data);
@@ -73,7 +70,6 @@ class Barang extends BaseController
         $barangKode = $this->request->getVar('barang_kode');
         $barangNama = $this->request->getVar('barang_nama');
         $kategoriId = $this->request->getVar('kategori_id');
-        $satuanId = $this->request->getVar('satuan_id');
         $barangHarga = $this->request->getVar('barang_harga');
         $barangStok = $this->request->getVar('barang_stok');
 
@@ -98,13 +94,6 @@ class Barang extends BaseController
             'kategori_id' => [
                 'rules' => 'required',
                 'label' => 'Kategori',
-                'errors' => [
-                    'required' => '{field} wajib diisi',
-                ]
-            ],
-            'satuan_id' => [
-                'rules' => 'required',
-                'label' => 'Satuan',
                 'errors' => [
                     'required' => '{field} wajib diisi',
                 ]
@@ -152,7 +141,6 @@ class Barang extends BaseController
                 'barang_kode' => $barangKode,
                 'barang_nama' => $barangNama,
                 'kategori_id' => $kategoriId,
-                'satuan_id' => $satuanId,
                 'barang_harga' => $barangHarga,
                 'barang_stok' => $barangStok,
                 'barang_gambar' => $pathGambar,
@@ -172,18 +160,15 @@ class Barang extends BaseController
         if ($barangData) {
             // Inisialisasi model kategori dan satuan
             $kategoriModel = new Modelkategori();
-            $satuanModel = new Modelsatuan();
 
             // Siapkan data untuk dikirim ke view
             $data = [
                 'barang_kode'   => $barangData['barang_kode'],
                 'barang_nama'   => $barangData['barang_nama'],
                 'kategori_id'   => $barangData['kategori_id'],
-                'satuan_id'     => $barangData['satuan_id'],
                 'barang_harga'  => $barangData['barang_harga'],
                 'barang_stok'   => $barangData['barang_stok'],
                 'datakategori'  => $kategoriModel->findAll(),
-                'datasatuan'    => $satuanModel->findAll(),
                 'barang_gambar' => $barangData['barang_gambar']
             ];
 
@@ -201,7 +186,6 @@ class Barang extends BaseController
         $barangKode = $this->request->getVar('barang_kode');
         $barangNama = $this->request->getVar('barang_nama');
         $kategoriId = $this->request->getVar('kategori_id');
-        $satuanId = $this->request->getVar('satuan_id');
         $barangHarga = $this->request->getVar('barang_harga');
         $barangStok = $this->request->getVar('barang_stok');
 
@@ -222,13 +206,7 @@ class Barang extends BaseController
                     'required' => '{field} wajib diisi',
                 ]
             ],
-            'satuan_id' => [
-                'rules' => 'required',
-                'label' => 'Satuan',
-                'errors' => [
-                    'required' => '{field} wajib diisi',
-                ]
-            ],
+
             'barang_harga' => [
                 'rules' => 'required|numeric',
                 'label' => 'Harga',
@@ -285,7 +263,6 @@ class Barang extends BaseController
             $this->barang->update($cekData['id'], [
                 'barang_nama' => $barangNama,
                 'kategori_id' => $kategoriId,
-                'satuan_id' => $satuanId,
                 'barang_harga' => $barangHarga,
                 'barang_stok' => $barangStok,
                 'barang_gambar' => $pathGambar,

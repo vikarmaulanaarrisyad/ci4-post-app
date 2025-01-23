@@ -57,17 +57,7 @@ Form Edit Barang
         </select>
     </div>
 </div>
-<div class="form-group row">
-    <label for="satuan_id" class="col-sm-3 col-form-label">Pilih Satuan</label>
-    <div class="col-sm-7">
-        <select name="satuan_id" id="satuan_id" class="form-control <?= session('errors.satuan_id') ? 'is-invalid' : '' ?>">
-            <option selected disabled>Pilih Satuan</option>
-            <?php foreach ($datasatuan as $sat) : ?>
-                <option value="<?= $sat['id'] ?>" <?= old('satuan_id', $satuan_id) == $sat['id'] ? 'selected' : '' ?>><?= $sat['satuan_nama'] ?></option>
-            <?php endforeach; ?>
-        </select>
-    </div>
-</div>
+
 <div class="form-group row">
     <label for="barang_harga" class="col-sm-3 col-form-label">Harga</label>
     <div class="col-sm-7">

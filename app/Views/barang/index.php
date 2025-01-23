@@ -36,7 +36,6 @@ Manajemen Data Barang
             <th>Kode Barang</th>
             <th>Nama Barang</th>
             <th>Kategori</th>
-            <th>Satuan</th>
             <th>Harga</th>
             <th>Stok</th>
             <th style="width:15%">Aksi</th>

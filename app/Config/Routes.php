@@ -17,9 +17,6 @@ $routes->get('/', 'Login::index');
 $routes->get('/kategori', 'Kategori::index');
 $routes->get('/kategori/hapus/(:any)', 'Kategori::hapus/$1');
 
-// Routes for 'Satuan' (Unit)
-$routes->get('/satuan', 'Satuan::index'); // Show list of units
-
 // Routes for 'Barang' (Product)
 $routes->get('/barang', 'Barang::index'); // Show list of products
 $routes->get('/barang/hapus/(:any)', 'Barang::hapus/$1');

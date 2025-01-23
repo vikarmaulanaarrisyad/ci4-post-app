@@ -26,10 +26,6 @@ class Barang extends Migration
                 'type' => 'int',
                 'unsigned' => true
             ],
-            'satuan_id' => [
-                'type' => 'int',
-                'unsigned' => true
-            ],
             'barang_harga' => [
                 'type' => 'double',
             ],
@@ -44,7 +40,6 @@ class Barang extends Migration
 
         $this->forge->addPrimaryKey('id');
         $this->forge->addForeignKey('kategori_id', 'kategori', 'id');
-        $this->forge->addForeignKey('satuan_id', 'satuan', 'id');
         $this->forge->createTable('barang');
     }
 
